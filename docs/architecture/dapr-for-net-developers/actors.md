@@ -401,11 +401,11 @@ You create weakly-typed proxies in a similar way to strongly-typed proxies. Inst
 [HttpPut("{scoreId}")]
 public Task<int> IncrementAsync(string scoreId)
 {
-    var scoreActor = _actorProxyFactory.CreateActorProxy(
+    var scoreActor = _actorProxyFactory.Create(
         new ActorId(scoreId),
         "ScoreActor");
 
-    return scoreActor("IncrementScoreAsync");
+    return await scoreActor.InvokeMethodAsync("IncrementScoreAsync");
 }
 ```
 
